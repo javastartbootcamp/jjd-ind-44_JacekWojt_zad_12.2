@@ -1,29 +1,9 @@
 public class StatisticsCalculator {
 
-    public static double countManagementEmployee(Employee[] employees) {
-        double number = 0.0;
+    public static int countEmployeesInDepartment(Employee[] employees, String department) {
+        int number = 0;
         for (Employee employee : employees) {
-            if (employee.getDepartment().equals("Management")) {
-                number++;
-            }
-        }
-        return number;
-    }
-
-    public static double countSupportEmployee(Employee[] employees) {
-        double number = 0.0;
-        for (Employee employee : employees) {
-            if (employee.getDepartment().equals("Support")) {
-                number++;
-            }
-        }
-        return number;
-    }
-
-    public static double countItEmployee(Employee[] employees) {
-        double number = 0.0;
-        for (Employee employee : employees) {
-            if (employee.getDepartment().equals("IT")) {
+            if (employee.getDepartment().equals(department)) {
                 number++;
             }
         }

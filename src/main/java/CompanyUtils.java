@@ -3,14 +3,27 @@ import java.util.Scanner;
 
 public class CompanyUtils {
 
-    public static double[] statistics(Employee[] employees) {
-        double[] statistics = new double[6];
-        statistics[0] = StatisticsCalculator.avgSalary(employees);
-        statistics[1] = StatisticsCalculator.minSalary(employees);
-        statistics[2] = StatisticsCalculator.maxSalary(employees);
-        statistics[3] = StatisticsCalculator.countItEmployee(employees);
-        statistics[4] = StatisticsCalculator.countSupportEmployee(employees);
-        statistics[5] = StatisticsCalculator.countManagementEmployee(employees);
+    public static void write(Statistics statistics, File fileName) throws IOException {
+        File stats = new File("stats.txt");
+        stats.createNewFile();
+        FileWriter fileWriter = new FileWriter(stats);
+        fileWriter.write("Średnia wypłat: " + statistics.getAvgSalary() + "\n");
+        fileWriter.write("Minimalna wypłata: " + statistics.getMinSalary() + "\n");
+        fileWriter.write("Maksymalna wypłata: " + statistics.getMaxSalary() + "\n");
+        fileWriter.write("Liczba pracowników IT: " + statistics.getNumberOfItEmployee() + "\n");
+        fileWriter.write("Liczba pracowników Support: " + statistics.getNumberOfSupportEmployee() + "\n");
+        fileWriter.write("Liczba pracowników Management: " + statistics.getNumberOfManagementEmployee() + "\n");
+        fileWriter.close();
+    }
+
+    public static Statistics getStatistics(Employee[] employees) {
+        Statistics statistics = new Statistics();
+        statistics.setAvgSalary(StatisticsCalculator.avgSalary(employees));
+        statistics.setMinSalary(StatisticsCalculator.minSalary(employees));
+        statistics.setMaxSalary(StatisticsCalculator.maxSalary(employees));
+        statistics.setNumberOfItEmployee(StatisticsCalculator.countEmployeesInDepartment(employees, "IT"));
+        statistics.setNumberOfSupportEmployee(StatisticsCalculator.countEmployeesInDepartment(employees, "Support"));
+        statistics.setNumberOfManagementEmployee(StatisticsCalculator.countEmployeesInDepartment(employees, "Management"));
         return statistics;
     }
 
