@@ -9,14 +9,11 @@ public class Main {
         File file = new File("employees.csv");
 
         if (file.exists()) {
+            String fileName = "employees.csv";
+            Employee[] employees = CompanyUtils.read(fileName);
+            Statistics statistics = CompanyUtils.getStatistics(employees);
             File stats = new File("stats.txt");
-            stats.createNewFile();
-
-//            FileWriter fileWriter = new FileWriter(stats);
-//            fileWriter.write("Średnia wypłata: 5000");
-//
-//            fileWriter.close();
+            CompanyUtils.write(statistics, stats);
         }
-
     }
 }
